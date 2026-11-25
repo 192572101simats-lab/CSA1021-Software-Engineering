@@ -1,0 +1,31 @@
+@startuml
+left to right direction
+actor Customer
+actor Restaurant
+actor Administrator
+actor "Delivery Agent" as Agent
+rectangle "Online Food Delivery System" {
+  usecase "Browse Restaurants" as UC1
+  usecase "View Menu" as UC2
+  usecase "Place Order" as UC3
+  usecase "Make Payment" as UC4
+  usecase "Track Order" as UC5
+  usecase "Manage Menu" as UC6
+  usecase "Update Order Status" as UC7
+  usecase "Accept Delivery Request" as UC8
+  usecase "Update Delivery Status" as UC9
+  usecase "Manage Users" as UC10
+}
+Customer --> UC1
+Customer --> UC2
+Customer --> UC3
+Customer --> UC4
+Customer --> UC5
+Restaurant --> UC6
+Restaurant --> UC7
+Administrator --> UC10
+Agent --> UC8
+Agent --> UC9
+UC3 ..> UC4 : <<include>>
+UC1 ..> UC2 : <<include>>
+@enduml

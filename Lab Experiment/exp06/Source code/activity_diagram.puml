@@ -1,0 +1,20 @@
+@startuml
+start
+:Browse restaurants;
+:Select food items;
+:Place order;
+repeat
+  :Make payment;
+repeat while (Payment successful?) is (No) not (Yes)
+:Restaurant receives order;
+if (Restaurant accepts?) then (Yes)
+  :Prepare food & update status;
+  :Assign delivery agent;
+  :Agent picks up order;
+  :Customer tracks delivery;
+  :Deliver order & complete;
+else (No)
+  :Refund payment / notify customer;
+endif
+stop
+@enduml

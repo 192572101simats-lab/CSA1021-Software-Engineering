@@ -1,0 +1,62 @@
+@startuml
+class Customer { -customerId
+ -name
+ -email
+ -phone
+ -address
+ +register()
+ +login()
+ +browseRestaurants()
+ +placeOrder()
+ +trackOrder() }
+class Restaurant { -restaurantId
+ -name
+ -address
+ -rating
+ +manageMenu()
+ +updateOrderStatus() }
+class Menu { -menuId
+ -title
+ +addItem()
+ +removeItem() }
+class FoodItem { -itemId
+ -name
+ -price
+ -available
+ +updatePrice()
+ +setAvailability() }
+class Order { -orderId
+ -orderDate
+ -status
+ -totalAmount
+ +calculateTotal()
+ +updateStatus()
+ +cancel() }
+class Payment { -paymentId
+ -amount
+ -method
+ -status
+ +makePayment()
+ +refund() }
+class DeliveryAgent { -agentId
+ -name
+ -phone
+ -vehicleNo
+ -available
+ +acceptDelivery()
+ +updateDeliveryStatus() }
+class Delivery { -deliveryId
+ -pickupTime
+ -deliveryTime
+ -status
+ +assignAgent()
+ +track() }
+Customer "1" -- "0..*" Order : places
+Restaurant "1" -- "0..*" Order : receives
+Restaurant "1" *-- "1" Menu : has
+Menu "1" *-- "1..*" FoodItem : contains
+Order "0..*" o-- "1..*" FoodItem : includes
+Order "1" -- "1" Payment : paid by
+Order "1" -- "1" Delivery : fulfilled by
+DeliveryAgent "1" -- "0..*" Delivery : handles
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+start
+:Login;
+:Assign duty (Administrator);
+:View duty schedule;
+if (Leave required?) then (Yes)
+  :Apply leave;
+  if (Leave approved?) then (Yes)
+    :Mark leave in record;
+  else (No)
+    :Perform duty at campus location;
+    :Record attendance;
+  endif
+else (No)
+  :Perform duty at campus location;
+  :Record attendance;
+endif
+:Calculate salary (month end);
+:Generate salary report;
+:Logout;
+stop
+@enduml

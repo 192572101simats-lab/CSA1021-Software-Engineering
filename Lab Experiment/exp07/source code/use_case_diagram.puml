@@ -1,0 +1,32 @@
+@startuml
+left to right direction
+actor Administrator as Admin
+actor "Security Personnel" as Guard
+actor "Accounts Officer" as Acc
+rectangle "Security Management System" {
+  usecase "Login" as L
+  usecase "Assign Duty" as AD
+  usecase "View Duty Schedule" as VD
+  usecase "Apply Leave" as AL
+  usecase "Approve Leave" as PL
+  usecase "Record Attendance" as RA
+  usecase "Update Duty Status" as UD
+  usecase "Calculate Salary" as CS
+  usecase "Generate Salary Report" as GS
+  usecase "Logout" as LO
+}
+Admin --> L
+Admin --> AD
+Admin --> PL
+Admin --> LO
+Guard --> L
+Guard --> VD
+Guard --> AL
+Guard --> RA
+Guard --> UD
+Guard --> LO
+Acc --> L
+Acc --> CS
+Acc --> GS
+CS ..> GS : <<include>>
+@enduml

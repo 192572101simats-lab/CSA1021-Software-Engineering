@@ -1,0 +1,66 @@
+@startuml
+class Administrator { -adminId
+ -name
+ -username
+ -password
+ +login()
+ +assignDuty()
+ +approveLeave()
+ +generateReport() }
+class SecurityPersonnel { -personId
+ -name
+ -phone
+ -address
+ -designation
+ -basicSalary
+ +login()
+ +viewDutySchedule()
+ +applyLeave()
+ +markAttendance() }
+class DutySchedule { -scheduleId
+ -date
+ -startTime
+ -endTime
+ -status
+ +assign()
+ +update() }
+class CampusLocation { -locationId
+ -name
+ -block
+ -description
+ +getDetails() }
+class Leave { -leaveId
+ -fromDate
+ -toDate
+ -reason
+ -status
+ +apply()
+ +approve()
+ +reject() }
+class Attendance { -attendanceId
+ -date
+ -inTime
+ -outTime
+ -status
+ +record()
+ +update() }
+class Salary { -salaryId
+ -month
+ -year
+ -leaveDeduction
+ -netSalary
+ +calculate()
+ +generateSlip() }
+class AccountsOfficer { -officerId
+ -name
+ +calculateSalary()
+ +generateSalaryReport() }
+Administrator "1" -- "0..*" DutySchedule : creates
+SecurityPersonnel "1" -- "0..*" DutySchedule : follows
+DutySchedule "0..*" -- "1" CampusLocation : covers
+SecurityPersonnel "1" -- "0..*" Leave : applies
+Administrator "1" -- "0..*" Leave : approves
+SecurityPersonnel "1" *-- "0..*" Attendance : has
+SecurityPersonnel "1" -- "0..*" Salary : receives
+AccountsOfficer "1" -- "0..*" Salary : calculates
+@enduml

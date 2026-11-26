@@ -1,0 +1,10 @@
+docker --version
+docker run hello-world
+docker build -t static-site:1.0 .
+docker images
+docker run -d --name mysite -p 8080:80 static-site:1.0
+docker ps
+# browse http://localhost:8080
+docker logs mysite
+docker stop mysite
+docker rm mysite

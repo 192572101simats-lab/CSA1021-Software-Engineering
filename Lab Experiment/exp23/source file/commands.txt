@@ -1,0 +1,22 @@
+minikube start --cpus=2 --memory=4096
+minikube addons enable metrics-server
+kubectl create namespace multiapp
+kubectl config set-context --current --namespace=multiapp
+docker build -t YOUR_DOCKERHUB_USERNAME/k8s-backend:1.0 backend
+docker build -t YOUR_DOCKERHUB_USERNAME/k8s-frontend:1.0 frontend
+docker push YOUR_DOCKERHUB_USERNAME/k8s-backend:1.0
+docker push YOUR_DOCKERHUB_USERNAME/k8s-frontend:1.0
+kubectl apply -f mysql.yaml
+kubectl apply -f backend.yaml
+kubectl apply -f frontend.yaml
+kubectl get all
+minikube service frontend-service -n multiapp --url
+kubectl get pods -o wide
+kubectl get svc
+kubectl describe deployment frontend
+kubectl logs deploy/backend
+minikube dashboard
+kubectl scale deployment frontend --replicas=4
+kubectl get pods -l app=frontend
+kubectl autoscale deployment frontend --cpu-percent=50 --min=2 --max=6
+kubectl get hpa

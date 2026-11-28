@@ -1,0 +1,12 @@
+docker build -t todo-app:1.0 .
+docker images todo-app
+docker run -d --name todo -p 5000:5000 todo-app:1.0
+docker ps
+curl http://localhost:5000/api/tasks
+docker exec -it todo python -c "import urllib.request;print(urllib.request.urlopen('http://localhost:5000/api/tasks').read())"
+docker logs todo
+docker login
+docker tag todo-app:1.0 YOUR_DOCKERHUB_USERNAME/todo-app:1.0
+docker push YOUR_DOCKERHUB_USERNAME/todo-app:1.0
+docker stop todo
+docker rm todo

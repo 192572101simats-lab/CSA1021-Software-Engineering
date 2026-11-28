@@ -1,0 +1,14 @@
+docker build -t static-web .
+docker images
+docker login -u YOUR_DOCKERHUB_USERNAME
+docker tag static-web YOUR_DOCKERHUB_USERNAME/static-web:1.0
+docker tag static-web YOUR_DOCKERHUB_USERNAME/static-web:latest
+docker images
+docker push YOUR_DOCKERHUB_USERNAME/static-web:1.0
+docker push YOUR_DOCKERHUB_USERNAME/static-web:latest
+# second machine / Play with Docker:
+docker pull YOUR_DOCKERHUB_USERNAME/static-web:1.0
+docker images
+docker run -d --name web -p 8080:80 YOUR_DOCKERHUB_USERNAME/static-web:1.0
+docker ps
+curl http://localhost:8080
